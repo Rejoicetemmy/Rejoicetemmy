@@ -64,6 +64,10 @@ section { scroll-margin-top: 56px; }
   .hero .fs-4 { font-size: 1.1rem !important; }
 }
 
+/* To-do list */
+.todo-done span { text-decoration: line-through; color: #999; }
+#todoList li span { cursor: pointer; flex: 1; word-break: break-word; }
+
 </style>
 </head>
 <body>
@@ -153,7 +157,7 @@ section { scroll-margin-top: 56px; }
             <div class="card-body">
               <h5 class="card-title">To-Do List</h5>
               <p class="card-text">A JavaScript app where tasks can be added and removed.</p>
-              <a href="#" class="btn btn-primary btn-sm project-link" data-repo="Rejoicetemmy" target="_blank" rel="noopener">View on GitHub</a>
+              <a href="#todo" class="btn btn-primary btn-sm">Try it below</a>
             </div>
           </div>
         </div>
@@ -170,8 +174,32 @@ section { scroll-margin-top: 56px; }
     </div>
   </section>
 
+  <!-- To-Do List App -->
+  <section id="todo" class="py-5 bg-light">
+    <div class="container">
+      <h2 class="section-title text-center">To-Do List App</h2>
+      <div class="row justify-content-center">
+        <div class="col-lg-6">
+          <div class="card project-card">
+            <div class="card-body">
+              <p id="todoCounter" class="text-center text-muted mb-3"></p>
+              <div class="input-group">
+                <input type="text" id="todoInput" class="form-control" placeholder="Add a new task...">
+                <button class="btn btn-primary" id="todoAddBtn" type="button">Add</button>
+              </div>
+              <p id="todoError" class="text-danger small my-2"></p>
+              <ul id="todoList" class="list-group"></ul>
+              <p id="todoEmpty" class="text-center text-muted mb-0">No tasks yet. Add one above.</p>
+              <p class="text-center text-muted small mt-3 mb-0">Tap a task to mark it done. Built with JavaScript arrays, the DOM and events.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- Contact -->
-  <section id="contact" class="py-5 bg-light">
+  <section id="contact" class="py-5">
     <div class="container">
       <h2 class="section-title text-center">Contact Me</h2>
       <div class="row justify-content-center">
@@ -267,6 +295,73 @@ form.addEventListener('submit', function (event) {
     formMessage.innerHTML = '<div class="alert alert-danger">Please correct the errors below.</div>';
   }
 });
+
+
+// To-do list app
+(function () {
+  let tasks = [];
+
+  const input = document.getElementById('todoInput');
+  const addBtn = document.getElementById('todoAddBtn');
+  const list = document.getElementById('todoList');
+  const error = document.getElementById('todoError');
+  const empty = document.getElementById('todoEmpty');
+  const counter = document.getElementById('todoCounter');
+
+  function render() {
+    list.innerHTML = '';
+
+    tasks.forEach(function (task, index) {
+      const li = document.createElement('li');
+      li.className = 'list-group-item d-flex justify-content-between align-items-center gap-2';
+      if (task.done) li.classList.add('todo-done');
+
+      const text = document.createElement('span');
+      text.textContent = task.text;
+      text.addEventListener('click', function () {
+        tasks[index].done = !tasks[index].done;
+        render();
+      });
+
+      const del = document.createElement('button');
+      del.type = 'button';
+      del.className = 'btn btn-danger btn-sm';
+      del.textContent = 'Delete';
+      del.addEventListener('click', function () {
+        tasks.splice(index, 1);
+        render();
+      });
+
+      li.appendChild(text);
+      li.appendChild(del);
+      list.appendChild(li);
+    });
+
+    const remaining = tasks.filter(function (t) { return !t.done; }).length;
+    counter.textContent = remaining + ' of ' + tasks.length + ' tasks remaining';
+    empty.style.display = tasks.length === 0 ? 'block' : 'none';
+  }
+
+  function addTask() {
+    const value = input.value.trim();
+    if (value === '') {
+      error.textContent = 'Please type a task first.';
+      return;
+    }
+    error.textContent = '';
+    tasks.push({ text: value, done: false });
+    input.value = '';
+    input.focus();
+    render();
+  }
+
+  addBtn.addEventListener('click', addTask);
+  input.addEventListener('keydown', function (event) {
+    if (event.key === 'Enter') addTask();
+  });
+
+  render();
+})();
 
 </script>
 </body>
