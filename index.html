@@ -68,6 +68,28 @@ section { scroll-margin-top: 56px; }
 .todo-done span { text-decoration: line-through; color: #999; }
 #todoList li span { cursor: pointer; flex: 1; word-break: break-word; }
 
+/* Timetable */
+.timetable th { background-color: #1e3a5f; color: #fff; white-space: nowrap; }
+.timetable tbody th { background-color: #3b82c4; }
+.timetable td { background-color: #fff; min-width: 120px; }
+.timetable .break-row td { background-color: #f2a541; font-weight: 600; }
+
+/* Landing page demo */
+.lp-demo { border: 1px solid #ccd6e0; border-radius: 10px; overflow: hidden; background: #fff; }
+.lp-header { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; padding: 14px 20px; background: #1e3a5f; color: #fff; }
+.lp-hero { text-align: center; padding: 50px 20px; background: linear-gradient(135deg, #3b82c4, #1e3a5f); color: #fff; }
+.lp-hero h3 { font-weight: 700; margin-bottom: 10px; }
+.lp-btn { display: inline-block; margin-top: 10px; padding: 10px 24px; background: #f2a541; color: #1b2a3f; font-weight: 600; text-decoration: none; border-radius: 6px; }
+.lp-features { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; padding: 24px 20px; }
+.lp-feature { background: #f4f7fb; border-radius: 8px; padding: 18px; text-align: center; }
+.lp-feature h4 { font-size: 1.1rem; color: #1e3a5f; }
+.lp-feature p { margin-bottom: 0; font-size: 0.9rem; }
+.lp-footer { text-align: center; padding: 12px; background: #1e3a5f; color: #fff; font-size: 0.85rem; }
+@media (max-width: 768px) {
+  .lp-features { grid-template-columns: 1fr; }
+  .lp-header { justify-content: center; text-align: center; }
+}
+
 </style>
 </head>
 <body>
@@ -139,7 +161,7 @@ section { scroll-margin-top: 56px; }
             <div class="card-body">
               <h5 class="card-title">Registration Form</h5>
               <p class="card-text">A styled registration form with different input types and JavaScript validation.</p>
-              <a href="#" class="btn btn-primary btn-sm project-link" data-repo="Rejoicetemmy" target="_blank" rel="noopener">View on GitHub</a>
+              <a href="#registration" class="btn btn-primary btn-sm">Try it below</a>
             </div>
           </div>
         </div>
@@ -148,7 +170,7 @@ section { scroll-margin-top: 56px; }
             <div class="card-body">
               <h5 class="card-title">Class Timetable</h5>
               <p class="card-text">A timetable page built with HTML tables and styled with CSS.</p>
-              <a href="#" class="btn btn-primary btn-sm project-link" data-repo="Rejoicetemmy" target="_blank" rel="noopener">View on GitHub</a>
+              <a href="#timetable" class="btn btn-primary btn-sm">View below</a>
             </div>
           </div>
         </div>
@@ -166,7 +188,66 @@ section { scroll-margin-top: 56px; }
             <div class="card-body">
               <h5 class="card-title">Responsive Landing Page</h5>
               <p class="card-text">A landing page that adapts to phone, tablet and desktop screens.</p>
-              <a href="#" class="btn btn-primary btn-sm project-link" data-repo="Rejoicetemmy" target="_blank" rel="noopener">View on GitHub</a>
+              <a href="#landing" class="btn btn-primary btn-sm">View below</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="text-center mt-4">
+        <a href="#" class="btn btn-outline-primary project-link" data-repo="Rejoicetemmy" target="_blank" rel="noopener">See all my work on GitHub</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Registration Form -->
+  <section id="registration" class="py-5 bg-light">
+    <div class="container">
+      <h2 class="section-title text-center">Registration Form</h2>
+      <div class="row justify-content-center">
+        <div class="col-lg-6">
+          <div class="card project-card">
+            <div class="card-body">
+              <div id="regMessage"></div>
+              <form id="regForm" novalidate>
+                <div class="mb-3">
+                  <label for="regName" class="form-label">Full Name</label>
+                  <input type="text" id="regName" class="form-control" placeholder="Your full name">
+                  <div class="invalid-feedback">Please enter your full name (at least 3 characters).</div>
+                </div>
+                <div class="mb-3">
+                  <label for="regEmail" class="form-label">Email</label>
+                  <input type="email" id="regEmail" class="form-control" placeholder="you@example.com">
+                  <div class="invalid-feedback">Please enter a valid email address.</div>
+                </div>
+                <div class="mb-3">
+                  <label for="regCourse" class="form-label">Course</label>
+                  <select id="regCourse" class="form-select">
+                    <option value="">Choose a course...</option>
+                    <option>Web Development</option>
+                    <option>Software Engineering</option>
+                    <option>Data Analysis</option>
+                    <option>UI/UX Design</option>
+                  </select>
+                  <div class="invalid-feedback">Please choose a course.</div>
+                </div>
+                <div class="mb-3">
+                  <label for="regPassword" class="form-label">Password</label>
+                  <input type="password" id="regPassword" class="form-control" placeholder="At least 6 characters">
+                  <div class="invalid-feedback">Password must be at least 6 characters.</div>
+                </div>
+                <div class="mb-3">
+                  <label for="regConfirm" class="form-label">Confirm Password</label>
+                  <input type="password" id="regConfirm" class="form-control" placeholder="Repeat your password">
+                  <div class="invalid-feedback">The passwords do not match.</div>
+                </div>
+                <div class="form-check mb-3">
+                  <input class="form-check-input" type="checkbox" id="regTerms">
+                  <label class="form-check-label" for="regTerms">I agree to the terms and conditions</label>
+                  <div class="invalid-feedback">You must agree before registering.</div>
+                </div>
+                <button type="submit" class="btn btn-primary w-100">Register</button>
+              </form>
+              <p class="text-center text-muted small mt-3 mb-0">A practice form built with HTML, Bootstrap and JavaScript validation. Nothing is saved.</p>
             </div>
           </div>
         </div>
@@ -174,8 +255,85 @@ section { scroll-margin-top: 56px; }
     </div>
   </section>
 
+  <!-- Class Timetable -->
+  <section id="timetable" class="py-5">
+    <div class="container">
+      <h2 class="section-title text-center">Class Timetable</h2>
+      <div class="table-responsive">
+        <table class="table table-bordered text-center align-middle timetable">
+          <thead>
+            <tr>
+              <th>Time</th>
+              <th>Monday</th>
+              <th>Tuesday</th>
+              <th>Wednesday</th>
+              <th>Thursday</th>
+              <th>Friday</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th>8:00 - 10:00</th>
+              <td>Programming</td>
+              <td>Mathematics</td>
+              <td>Web Development</td>
+              <td>Data Structures</td>
+              <td>Computer Networks</td>
+            </tr>
+            <tr>
+              <th>10:00 - 12:00</th>
+              <td>Web Development</td>
+              <td>Programming</td>
+              <td>Communication Skills</td>
+              <td>Mathematics</td>
+              <td>Data Structures</td>
+            </tr>
+            <tr class="break-row">
+              <th>12:00 - 1:00</th>
+              <td colspan="5">Break</td>
+            </tr>
+            <tr>
+              <th>1:00 - 3:00</th>
+              <td>Data Structures</td>
+              <td>Computer Networks</td>
+              <td>Programming</td>
+              <td>Web Development</td>
+              <td>Practical / Lab</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="text-center text-muted small mb-0">A timetable page built with HTML tables and styled with CSS. Swipe sideways on small screens.</p>
+    </div>
+  </section>
+
+  <!-- Responsive Landing Page -->
+  <section id="landing" class="py-5 bg-light">
+    <div class="container">
+      <h2 class="section-title text-center">Responsive Landing Page</h2>
+      <div class="lp-demo">
+        <div class="lp-header">
+          <strong>LearnHub</strong>
+          <span>Home &middot; Courses &middot; Contact</span>
+        </div>
+        <div class="lp-hero">
+          <h3>Learn Skills That Get You Hired</h3>
+          <p>Practical courses in web development, design and more.</p>
+          <a href="#landing" class="lp-btn">Get Started</a>
+        </div>
+        <div class="lp-features">
+          <div class="lp-feature"><h4>Learn Online</h4><p>Study from anywhere at your own pace.</p></div>
+          <div class="lp-feature"><h4>Expert Tutors</h4><p>Get guidance from experienced teachers.</p></div>
+          <div class="lp-feature"><h4>Certificates</h4><p>Earn proof of your new skills.</p></div>
+        </div>
+        <div class="lp-footer">&copy; LearnHub. A practice layout.</div>
+      </div>
+      <p class="text-center text-muted small mt-3 mb-0">A practice landing page using CSS Grid, Flexbox and media queries. Resize your browser to see it adapt.</p>
+    </div>
+  </section>
+
   <!-- To-Do List App -->
-  <section id="todo" class="py-5 bg-light">
+  <section id="todo" class="py-5">
     <div class="container">
       <h2 class="section-title text-center">To-Do List App</h2>
       <div class="row justify-content-center">
@@ -199,7 +357,7 @@ section { scroll-margin-top: 56px; }
   </section>
 
   <!-- Contact -->
-  <section id="contact" class="py-5">
+  <section id="contact" class="py-5 bg-light">
     <div class="container">
       <h2 class="section-title text-center">Contact Me</h2>
       <div class="row justify-content-center">
@@ -361,6 +519,53 @@ form.addEventListener('submit', function (event) {
   });
 
   render();
+})();
+
+
+// Registration form validation
+(function () {
+  const form = document.getElementById('regForm');
+  const message = document.getElementById('regMessage');
+  const fields = {
+    name: document.getElementById('regName'),
+    email: document.getElementById('regEmail'),
+    course: document.getElementById('regCourse'),
+    password: document.getElementById('regPassword'),
+    confirm: document.getElementById('regConfirm'),
+    terms: document.getElementById('regTerms')
+  };
+
+  function mark(input, ok) {
+    input.classList.toggle('is-invalid', !ok);
+    input.classList.toggle('is-valid', ok);
+  }
+
+  form.addEventListener('submit', function (event) {
+    event.preventDefault();
+
+    const checks = [
+      [fields.name, fields.name.value.trim().length >= 3],
+      [fields.email, /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(fields.email.value.trim())],
+      [fields.course, fields.course.value !== ''],
+      [fields.password, fields.password.value.length >= 6],
+      [fields.confirm, fields.confirm.value === fields.password.value && fields.confirm.value !== ''],
+      [fields.terms, fields.terms.checked]
+    ];
+
+    let allOk = true;
+    checks.forEach(function (c) {
+      mark(c[0], c[1]);
+      if (!c[1]) allOk = false;
+    });
+
+    if (allOk) {
+      message.innerHTML = '<div class="alert alert-success">Registration successful. Welcome, ' + fields.name.value.trim() + '!</div>';
+      form.reset();
+      Object.keys(fields).forEach(function (k) { fields[k].classList.remove('is-valid'); });
+    } else {
+      message.innerHTML = '<div class="alert alert-danger">Please correct the errors below.</div>';
+    }
+  });
 })();
 
 </script>
